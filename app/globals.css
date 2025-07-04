@@ -1,26 +1,183 @@
-@import "tailwindcss";
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* Basic Reset and Body Styling */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: #333;
+  background-image: url('/app/images/spark.png');
+}
+
+.container {
+  display: grid;
+  /* Define grid areas for easier placement */
+  grid-template-areas:
+    "navbar"
+    "main"
+    "footer";
+  /* Default for mobile: single column */
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr auto;
+  /* navbar auto height, main takes remaining, footer auto */
+  min-height: 100vh;
+  /* Ensure container takes full viewport height */
+}
+
+/* Navbar Styling */
+.navbar {
+  grid-area: navbar;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #333;
+  color: white;
+  padding: 1rem;
+  position: relative;
+  /* For absolute positioning of hamburger menu */
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.nav-links ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  /* For desktop, show links in a row */
+}
+
+.nav-links li {
+  margin-left: 20px;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  padding: 0.5rem 0;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #ffd700;
+  /* Gold color on hover */
+}
+
+/* Hamburger Icon (initially hidden on desktop) */
+.hamburger {
+  display: none;
+  /* Hide by default */
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+/* Checkbox for Toggling Menu (hidden) */
+.menu-toggle {
+  display: none;
+}
+
+/* Main Content Styling */
+.main-content {
+  grid-area: main;
+  display: grid;
+  grid-template-columns: 1fr;
+  /* Default to single column for smaller screens */
+  gap: 20px;
+  padding: 20px;
+}
+
+.column-left,
+.column-right {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Footer Styling */
+.footer {
+  grid-area: footer;
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+
+  /* Navbar for smaller screens */
+  .hamburger {
+    display: block;
+    /* Show hamburger icon */
+  }
+
+  .nav-links {
+    display: none;
+    /* Hide navigation links by default */
+    flex-direction: column;
+    width: 100%;
+    background-color: #444;
+    /* Slightly darker background when open */
+    position: absolute;
+    top: 100%;
+    /* Position below the navbar */
+    left: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .nav-links ul {
+    flex-direction: column;
+    padding: 1rem 0;
+  }
+
+  .nav-links li {
+    margin: 0;
+    text-align: center;
+    width: 100%;
+  }
+
+  .nav-links a {
+    display: block;
+    /* Make links full width of their container */
+    padding: 1rem;
+    border-bottom: 1px solid #555;
+  }
+
+  .nav-links li:last-child a {
+    border-bottom: none;
+  }
+
+  /* Show menu when checkbox is checked */
+  .menu-toggle:checked+.hamburger+.nav-links {
+    display: flex;
+  }
+
+  /* Main Content for smaller screens (remains single column by default) */
+}
+
+@media (min-width: 769px) {
+
+  /* Two-column layout for main content on larger screens */
+  .main-content {
+    grid-template-columns: 1fr 1fr;
+    /* Two equal columns */
+  }
+
+  /* Ensure hamburger is hidden and nav-links are displayed on larger screens */
+  .hamburger {
+    display: none;
+  }
+
+  .nav-links {
+    display: flex;
+    /* Ensure nav links are visible */
+    position: static;
+    /* Remove absolute positioning */
+    background-color: transparent;
+    /* Remove background */
+    box-shadow: none;
+    /* Remove shadow */
+  }
 }
