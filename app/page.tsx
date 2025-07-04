@@ -7,14 +7,19 @@ import mission from '@/app/images/mission.png';
 
 export default function Home() {
   return (
-    <>
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css" />
-      <div className="row">
-        <div className="column"><Image src={mission} alt="mission statement" /></div>
-        <div className="column">TBP</div>
+
+    <main className="main-content">
+      <div className="column-left">
+        <h2>Welcome to Our Site!</h2>
+        <p>This is the primary content area. You can place important information, articles, or features here.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
       </div>
-    </>
+      <div className="column-right">
+        <h2>Sidebar Content</h2>
+        <p>This column is perfect for secondary content like ads, related links, or user profiles.</p>
+        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      </div>
+    </main>
   );
 }
 // 

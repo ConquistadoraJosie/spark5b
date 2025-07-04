@@ -4,6 +4,7 @@ body {
   font-family: Arial, sans-serif;
   color: #333;
   background-image: url('/app/images/spark.png');
+  background-size: cover;
 }
 
 .container {
