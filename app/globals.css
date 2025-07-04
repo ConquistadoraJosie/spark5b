@@ -1,184 +1,239 @@
-/* Basic Reset and Body Styling */
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  color: #333;
-  background-image: url('/app/images/spark.png');
-  background-size: cover;
-}
-
-.container {
-  display: grid;
-  /* Define grid areas for easier placement */
-  grid-template-areas:
-    "navbar"
-    "main"
-    "footer";
-  /* Default for mobile: single column */
-  grid-template-columns: 1fr;
-  grid-template-rows: auto 1fr auto;
-  /* navbar auto height, main takes remaining, footer auto */
-  min-height: 100vh;
-  /* Ensure container takes full viewport height */
-}
-
 /* Navbar Styling */
 .navbar {
-  grid-area: navbar;
   display: flex;
   justify-content: space-between;
+  /* Pushes left and right sections apart */
   align-items: center;
   background-color: #333;
   color: white;
-  padding: 1rem;
+  padding: 1rem 20px;
   position: relative;
-  /* For absolute positioning of hamburger menu */
+  /* For absolute positioning of the mobile menu */
+  flex-wrap: wrap;
+  /* Allows wrapping on smaller screens if necessary */
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
 }
 
 .logo {
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   font-weight: bold;
+  margin-right: 20px;
+  /* Space between logo and desktop nav */
 }
 
-.nav-links ul {
+/* Desktop Navigation Links (for "Our Team", "Upcoming Sessions", "Events") */
+.desktop-nav-links ul {
   list-style: none;
   margin: 0;
   padding: 0;
   display: flex;
-  /* For desktop, show links in a row */
+  /* Show horizontally on desktop */
 }
 
-.nav-links li {
+.desktop-nav-links li {
   margin-left: 20px;
 }
 
-.nav-links a {
+/* Desktop Auth Links (for "Login", "Sign Up") */
+.desktop-auth-links ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  /* Show horizontally on desktop */
+}
+
+.desktop-auth-links li {
+  margin-left: 20px;
+}
+
+.navbar a {
   color: white;
   text-decoration: none;
   padding: 0.5rem 0;
   transition: color 0.3s ease;
 }
 
-.nav-links a:hover {
+.navbar a:hover {
   color: #ffd700;
   /* Gold color on hover */
 }
 
-/* Hamburger Icon (initially hidden on desktop) */
+/* Hamburger Icon */
 .hamburger {
   display: none;
-  /* Hide by default */
+  /* Hidden by default on desktop */
   font-size: 2rem;
   cursor: pointer;
+  color: white;
+  order: 3;
+  /* Ensures it appears on the right side before mobile menu */
 }
 
-/* Checkbox for Toggling Menu (hidden) */
+/* Hidden Checkbox for Toggle */
 .menu-toggle {
   display: none;
 }
 
-/* Main Content Styling */
-.main-content {
-  grid-area: main;
-  display: grid;
-  grid-template-columns: 1fr;
-  /* Default to single column for smaller screens */
-  gap: 20px;
-  padding: 20px;
+/* Mobile Menu (initially hidden) */
+.mobile-menu {
+  display: none;
+  /* Hidden by default */
+  flex-direction: column;
+  width: 100%;
+  /* Takes full width of the navbar */
+  background-color: #444;
+  /* Background for the dropdown menu */
+  position: absolute;
+  top: 100%;
+  /* Positions below the navbar */
+  left: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 0;
+  /* Reset padding */
 }
 
-.column-left,
-.column-right {
-  background-color: white;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.mobile-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 1rem 0;
+  /* Vertical padding for mobile menu items */
+  width: 100%;
 }
 
-/* Footer Styling */
-.footer {
-  grid-area: footer;
-  background-color: #333;
-  color: white;
+.mobile-menu li {
+  margin: 0;
   text-align: center;
-  padding: 1rem;
+  /* Center align items in mobile menu */
+  width: 100%;
 }
 
-/* Responsive Design */
+.mobile-menu a {
+  display: block;
+  /* Make links fill the whole width for easier tapping */
+  padding: 1rem 20px;
+  /* Padding for mobile menu links */
+  border-bottom: 1px solid #555;
+  /* Separator between links */
+}
+
+.mobile-menu li:last-child a {
+  border-bottom: none;
+  /* No border for the last item */
+}
+
+
+/* Responsive Media Queries */
+
+/* Tablet and Mobile Styles */
 @media (max-width: 768px) {
 
-  /* Navbar for smaller screens */
+  /* Hide desktop specific navs */
+  .desktop-nav-links,
+  .desktop-auth-links {
+    display: none;
+  }
+
+  /* Show hamburger */
   .hamburger {
     display: block;
-    /* Show hamburger icon */
   }
 
-  .nav-links {
-    display: none;
-    /* Hide navigation links by default */
-    flex-direction: column;
-    width: 100%;
-    background-color: #444;
-    /* Slightly darker background when open */
-    position: absolute;
-    top: 100%;
-    /* Position below the navbar */
-    left: 0;
-    z-index: 1000;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  /* Adjust navbar spacing on mobile */
+  .navbar {
+    justify-content: space-between;
+    /* Keep logo left, hamburger right */
+    padding: 1rem 15px;
+    /* Slightly less padding */
   }
 
-  .nav-links ul {
-    flex-direction: column;
-    padding: 1rem 0;
+  .navbar-left {
+    flex-grow: 1;
+    /* Allows logo to take space if hamburger is pushed right */
   }
 
-  .nav-links li {
-    margin: 0;
-    text-align: center;
-    width: 100%;
+  /* When hamburger is checked, show the mobile menu */
+  .menu-toggle:checked~.mobile-menu {
+    display: flex;
+    /* Show the mobile menu */
   }
+}
 
-  .nav-links a {
-    display: block;
-    /* Make links full width of their container */
-    padding: 1rem;
-    border-bottom: 1px solid #555;
-  }
+/* Desktop Styles */
+@media (min-width: 769px) {
 
-  .nav-links li:last-child a {
-    border-bottom: none;
-  }
-
-  /* Show menu when checkbox is checked */
-  .menu-toggle:checked+.hamburger+.nav-links {
+  /* Ensure desktop navs are visible */
+  .desktop-nav-links,
+  .desktop-auth-links {
     display: flex;
   }
 
-  /* Main Content for smaller screens (remains single column by default) */
+  /* Hide mobile menu and hamburger */
+  .mobile-menu,
+  .hamburger {
+    display: none;
+  }
+
+  /* Reset mobile-specific positioning */
+  .navbar-left {
+    flex-grow: 0;
+  }
 }
 
-@media (min-width: 769px) {
+/* Basic styling for demonstration */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  color: #333;
+}
 
-  /* Two-column layout for main content on larger screens */
-  .main-content {
+/* The main container for the grid */
+.grid-container {
+  display: grid;
+  gap: 20px;
+  /* Space between grid items */
+  padding: 20px;
+  /* Padding around the grid */
+  min-height: calc(100vh -
+      /* Adjust for header/footer if present */
+      0px);
+  /* Ensure it takes full height */
+  box-sizing: border-box;
+  /* Include padding in element's total width and height */
+}
+
+/* Default to a single column for smaller screens (mobile first) */
+.grid-container {
+  grid-template-columns: 1fr;
+  /* One column, takes up 100% width */
+}
+
+/* Styles for the grid items */
+.grid-item {
+
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: none;
+}
+
+/* Media query for larger screens (e.g., tablets and desktops) */
+@media (min-width: 768px) {
+  .grid-container {
     grid-template-columns: 1fr 1fr;
     /* Two equal columns */
   }
+}
 
-  /* Ensure hamburger is hidden and nav-links are displayed on larger screens */
-  .hamburger {
-    display: none;
-  }
-
-  .nav-links {
-    display: flex;
-    /* Ensure nav links are visible */
-    position: static;
-    /* Remove absolute positioning */
-    background-color: transparent;
-    /* Remove background */
-    box-shadow: none;
-    /* Remove shadow */
+/* You can add more breakpoints if needed */
+@media (min-width: 1024px) {
+  .grid-container {
+    grid-template-columns: 2fr 2fr;
+    /* Example: Left column wider than right */
   }
 }
