@@ -62,6 +62,7 @@ export async function signUp(formData: FormData) {
                 subscribe_newsletter: credentials.subscribe === 'yes', // Convert 'yes'/'no' to boolean
             },
         },
+
     });
 
     if (error) {
@@ -78,7 +79,8 @@ export async function signUp(formData: FormData) {
         };
     }
 
-    revalidatePath("/dashboard", "layout");
+
+    revalidatePath("https://spark5b.vercel.app/");
     return { status: "success", user: data.user };
 }
 //Sign in function for the user to log in to their account
