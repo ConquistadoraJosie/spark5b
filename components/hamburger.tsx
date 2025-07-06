@@ -1,3 +1,4 @@
+'use client';
 import React from "react";
 
 const Hamburger = () => (
@@ -22,7 +23,7 @@ const Hamburger = () => (
                     <li><a href="#">Our Team</a></li>
                     <li><a href="#">Upcoming Sessions</a></li>
                     <li><a href="#">Events</a></li>
-                    <li><a href="#">Login</a></li>
+                    <li><a href="/login">Login</a></li>
                     <li><a href="#">Sign Up</a></li>
                 </ul>
             </nav>
@@ -30,7 +31,7 @@ const Hamburger = () => (
             <div className="navbar-right">
                 <nav className="desktop-auth-links">
                     <ul>
-                        <li><a href="#">Login</a></li>
+                        <li><a href="/login">Login</a></li>
                         <li><a href="#">Sign Up</a></li>
                     </ul>
                 </nav>
